@@ -83,7 +83,7 @@ module Liqpay
       Coder.encode_signature sign_str.to_s
     end # cnb_signature
 
-    def cnb_hash(params = {})
+    def cnb_link(params = {})
       fail "Version can't be empty" if params[:version].nil? or params[:version].empty?
       language = 'ru'
       language = params[:language] unless params[:language].nil?
@@ -91,10 +91,12 @@ module Liqpay
       json_params = Coder.encode64 Coder.encode_json params
       signature = cnb_signature params
 
-      {
+      url_params = {
         data: json_params.to_s,
         signature: signature.to_s
-      }
+      }.to_param
+
+      ["#{@host}3/checkout", url_params].join('?')
     end
 
     def str_to_sign(str)
