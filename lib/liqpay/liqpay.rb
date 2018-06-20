@@ -26,7 +26,7 @@
 module Liqpay
   class Liqpay
     def initialize(options = {})
-      @host = 'https://www.liqpay.com/api/'
+      @host = 'https://www.liqpay.ua/api/'
       options[:host] = @host
       @public_key = options[:public_key] || ::Liqpay.config.public_key
       @private_key = options[:private_key] || ::Liqpay.config.private_key
